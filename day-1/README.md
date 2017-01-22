@@ -63,7 +63,7 @@ For this, we need [Babel][babel] to transpile for us. Let's install it, and the 
 ----------
 
 We'll need to set up Babel. Create a file called `.babelrc` with these contents:
-```
+```json
 { "presets": ["es2015", "react"] }
 ```
 That's it. We're just telling it to use the two presets we just installed.
@@ -197,6 +197,12 @@ We should get some output about the bundle, along with:
 ```shell
 Project is running at http://localhost:8080/
 ```
+
+That shell command is a bit of a handful, though. Let's edit `package.json` - add this to the `scripts` section
+```
+"start": "webpack-dev-server --config ./webpack.config.babel.js"
+```
+Now you can run the dev server with `npm run start`!
 
 ----------
 
