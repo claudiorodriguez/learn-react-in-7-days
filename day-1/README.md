@@ -10,6 +10,9 @@ Now, let's create a new package in this folder:
 ```
 
 Just press `<enter>` on every prompt, don't worry, we can change things later.
+
+----------
+
 Now we should have a `package.json` file in our folder. We are now ready to start installing packages.
 Let's start with React.
 
@@ -17,6 +20,8 @@ Let's start with React.
 > npm install --save react@15 react-dom@15
 ```
 (That `@x` is just to ensure you install that major version of the package, which was used at the time of writing this guide)
+
+----------
 
 Create a `src` folder and a file called `index.js` in it, with these contents:
 
@@ -30,10 +35,14 @@ const componentAsString = ReactDOMServer.renderToString(component);
 console.log(componentAsString);
 ```
 
+----------
+
 Now run `node src/index.js` - you should get something like this:
 ```html
 <div data-reactroot="" data-reactid="1" data-react-checksum="1309021079">Hello World!</div>
 ```
+
+----------
 
 Neat! We rendered a React component into a string, but...
 
@@ -51,11 +60,16 @@ For this, we need [Babel][babel] to transpile for us. Let's install it, and the 
 > npm install --save-dev babel-cli babel-core babel-preset-es2015 babel-preset-react
 ```
 
+----------
+
 We'll need to set up Babel. Create a file called `.babelrc` with these contents:
 ```
 { "presets": ["es2015", "react"] }
 ```
 That's it. We're just telling it to use the two presets we just installed.
+
+----------
+
 Now let's change `src/index.js` a bit to reflect our newly found powers:
 
 ```javascript
@@ -72,11 +86,14 @@ And run this command:
 ```shell
 > ./node_modules/.bin/babel src -d dist
 ```
+
+----------
+
 We basically just told Babel to take the `index.js` file (which we won't be able to run with `node`), and output a transpiled form of it in the `dist` folder. So, now we run:
 ```shell
 > node dist/index.js
 ```
-And we should be getting pretty much the same output as the last time!
+We should be getting pretty much the same output as the last time!
 ```html
 <div data-reactroot="" data-reactid="1" data-react-checksum="1309021079">Hello World!</div>
 ```
@@ -88,11 +105,15 @@ Babel isn't enough - if you read the contents of `dist/index.js`, you'll see it 
 
 That's where [webpack][] comes in - basically, it will take our `src/index.js`, add in the modules we import in it, and output a bundled JS file which can then be used on a browser.
 
+----------
+
 Let's start by installing `webpack`, and `webpack-dev-server`, which will help us run an http server on `localhost` to easily test our bundle.
 
 ```shell
 > npm install --save-dev webpack@2 webpack-dev-server@2 babel-loader
 ```
+
+----------
 
 Now, create a file called `webpack.config.babel.js` with these contents:
 
@@ -127,6 +148,9 @@ export default {
 ```
 
 Don't worry too much about it for now - just keep in mind we're putting in our entry file as `src/index.js`, passing `*.js` files through the `babel-loader`, and putting out our output on `/dist/bundle.js`.
+
+----------
+
 Before we can run `webpack-dev-server`, however, we'll need to make two changes.
 
 First, we'll create `demo/index.html`:
@@ -146,6 +170,9 @@ First, we'll create `demo/index.html`:
 ```
 
 Nothing crazy, just load up our bundled output, and have a `div` element on which we can render our app.
+
+----------
+
 Now, we change our server-rendering `src/index.js` to render on a browser environment:
 
 ```javascript
@@ -160,7 +187,9 @@ render(
 );
 ```
 
-That's it. Now we're ready to run `webpack-dev-server`:
+----------
+
+Now we're ready to run `webpack-dev-server`:
 ```shell
 > ./node_modules/.bin/webpack-dev-server --config ./webpack.config.babel.js
 ```
@@ -169,8 +198,12 @@ We should get some output about the bundle, along with:
 Project is running at http://localhost:8080/
 ```
 
+----------
+
 All that remains is opening that URL in our browser, and hopefully we'll see `Hello World!`.
 Try changing the component in `src/index.js`, say, have it be `Hello Worlds!` instead, and you'll notice the browser will reload automatically. This is default `webpack-dev-server` behaviour. Eventually, we'll get into hot-reloading, but for now, we have successfully created a working (if barebones) dev environment with React.
+
+----------
 
 Next day, we'll try and expand our application into something prettier and more interactive.
 
