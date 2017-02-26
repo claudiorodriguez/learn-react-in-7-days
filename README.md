@@ -29,13 +29,15 @@ You will also need a computer with Node.js 6+ and NPM installed.
 
 ## Contents
 
-* [Day 1][day-1]
+* [Day 1 - Setting up Webpack and Babel][day-1]
+* [Day 2 - React components: stateful, stateless, higher-order][day-2]
 
 ## License
 
 MIT - see [LICENSE][license-url]
 
 [day-1]: ./day-1/README.md
+[day-2]: ./day-2/README.md
 [you-dont-know-js]: https://github.com/getify/You-Dont-Know-JS
 [babel]: https://babeljs.io
 [react]: https://facebook.github.io/react

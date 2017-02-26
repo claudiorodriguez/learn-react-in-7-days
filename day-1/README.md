@@ -1,4 +1,7 @@
-# Day 1
+# Day 1 - Setting up Webpack and Babel
+
+This day's goal will be to setup the most basic tooling chain we can get away with in order to have a "Hello World"
+React component display in our browser, but we'll go about it step by step.
 
 ## Barest of bones, Node + React
 
